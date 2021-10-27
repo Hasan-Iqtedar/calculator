@@ -1,0 +1,25 @@
+body {
+    padding: 20px;
+    border: 1px solid black;
+}
+
+main {
+    width: 500px;
+    height: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: lightgrey;
+    border: 3px solid gray;
+}
+
+#display {
+    height: 20%;
+    background-color: whitesmoke;
+    border-bottom: 3px solid gray;
+}
+
+#control {
+    height: 80%;
+    /* border: 1px solid red; */
+}
