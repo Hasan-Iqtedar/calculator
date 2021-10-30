@@ -8,10 +8,13 @@ let expression = document.querySelector('#expression');
 let digits = document.querySelectorAll('.digit');
 let operators = document.querySelectorAll('.operator')
 
+let delButton = document.querySelector('#del');
 let clearButton = document.querySelector('#clear');
 let evaluateButton = document.querySelector('#evaluate');
 
+delButton.addEventListener('click', del);
 clearButton.addEventListener('click', clear);
+
 evaluateButton.addEventListener('click', () => {
     result = evaluate();
     operand1 = result;
@@ -27,11 +30,18 @@ digits.forEach((digit) => {
                 clear();
             }
 
+            if (digit.textContent === '.' && isFloat(operand1)) {
+                return;
+            }
+
             operand1 += digit.textContent;
         }
 
         //When entering second number.
         else if (operator !== '') {
+            if (digit.textContent === '.' && isFloat(operand2)) {
+                return;
+            }
             operand2 += digit.textContent;
         }
 
@@ -59,6 +69,22 @@ function displayEquation(e) {
     expression.textContent += e.target.textContent;
 }
 
+function del() {
+    if (operand2 !== '') {
+        let index = expression.textContent.indexOf(operator, 0);
+        expression.textContent = expression.textContent.substring(0, index + 1);
+        operand2 = '';
+    }
+    else if (operator !== '') {
+        expression.textContent = expression.textContent.replace(operator, '');
+        operator = '';
+    }
+    else {
+        expression.textContent = expression.textContent.replace(operand1, '');
+        operand1 = '';
+    }
+}
+
 function clear() {
     expression.textContent = "";
     operand1 = '';
@@ -77,7 +103,6 @@ function evaluate() {
         res = res.toFixed(2);
     }
 
-    console.log(operand1, operator, operand2, "=", res);
     clear();
     expression.textContent = res;
 
@@ -91,6 +116,7 @@ function operate(operator, num1, num2) {
         case '-': return subtract(num1, num2);
         case '*': return multiply(num1, num2);
         case '/': return divide(num1, num2);
+        case '%': return modulus(num1, num2);
     }
 }
 
@@ -108,4 +134,12 @@ function multiply(num1, num2) {
 
 function divide(num1, num2) {
     return num1 / num2;
+}
+
+function modulus(num1, num2) {
+    return num1 % num2;
+}
+
+function isFloat(n) {
+    return n % 1 !== 0;
 }
