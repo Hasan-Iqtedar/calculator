@@ -1,7 +1,7 @@
 let operand1 = '';
 let operand2 = '';
 let operator = '';
-//let currentValue;
+let result = '';
 
 
 let expression = document.querySelector('#expression');
@@ -13,7 +13,8 @@ let evaluateButton = document.querySelector('#evaluate');
 
 clearButton.addEventListener('click', clear);
 evaluateButton.addEventListener('click', () => {
-    operand1 = evaluate();
+    result = evaluate();
+    operand1 = result;
 });
 
 digits.forEach((digit) => {
@@ -22,8 +23,8 @@ digits.forEach((digit) => {
         //When entering first number.
         if (operator === '') {
             //When entering new number after result has been displayed.
-            if (operand1 === '') {
-                expression.textContent = '';
+            if (operand1 === '' || result !== '') {
+                clear();
             }
 
             operand1 += digit.textContent;
@@ -63,6 +64,7 @@ function clear() {
     operand1 = '';
     operand2 = '';
     operator = '';
+    result = '';
 }
 
 function evaluate() {
