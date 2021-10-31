@@ -3,8 +3,8 @@ body {
 }
 
 main {
-    width: 400px;
-    height: 500px;
+    width: 300px;
+    height: 350px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -32,7 +32,7 @@ main {
 
 #control {
     padding: 2px;
-    height: 100%;
+    height: 80%;
 }
 
 #grid {
@@ -41,7 +41,7 @@ main {
     row-gap: 2px;
     column-gap: 2px;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 80px);
+    grid-template-rows: repeat(5, 1fr);
 }
 
 .button {
@@ -75,3 +75,19 @@ button:hover {
 #clear:hover, #evaluate:hover, #del:hover {
     background-color: rgb(70, 15, 15);
 }
+
+@media(min-width: 450px){
+    main {
+        width: 340px;
+        height: 400px;
+    
+    }   
+}
+
+@media (min-width: 600px){
+    main {
+        width: 400px;
+        height: 500px;
+    }
+}
+
